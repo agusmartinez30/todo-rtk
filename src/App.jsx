@@ -12,8 +12,8 @@ function App() {
   console.log(listTasks);
 
   return (
-    <div class="bg-slate-900 h-full min-h-screen md:h-screen text-white">
-      <div class="flex  h-full">
+    <div class="bg-slate-900 h-full min-h-screen md:h-full text-white">
+      <div class="flex  h-full p-6">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

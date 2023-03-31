@@ -4,12 +4,13 @@ import { addTasks, updateTasks } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 function TaskForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const tasksState = useSelector(state => state.tasks)
-  const params = useParams()
+  const tasksState = useSelector((state) => state.tasks);
+  const params = useParams();
 
   const [tasks, setTasks] = useState({
     title: "",
@@ -24,49 +25,68 @@ function TaskForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(params.id){
-      dispatch(updateTasks(tasks))
-    }else{
+    if (params.id) {
+      dispatch(updateTasks(tasks));
+    } else {
+      const { title, description } = tasks;
+      console.log(title, description);
+      if (title != "" && description != "") {
+        dispatch(
+          addTasks({
+            ...tasks,
+            id: uuid(),
+          })
+        );
+        navigate("/");
+      } else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
 
-      dispatch(
-        addTasks({
-          ...tasks,
-          id: uuid(),
-        })
-      );
+        Toast.fire({
+          icon: "warning",
+          title: "Completa los campos",
+        });
+      }
     }
-    navigate("/");
   };
 
   useEffect(() => {
-   console.log(params.id)
-   if(params.id){
-    setTasks(tasksState.find(task => task.id === params.id))
-   }
-  }, [])
-  
+    if (params.id) {
+      setTasks(tasksState.find((task) => task.id === params.id));
+    }
+  }, []);
 
   return (
-    <form className="bg-sky-800 w-4/5 md:w-1/2 flex flex-col p-3 gap-3 rounded-md" onSubmit={handleSubmit}>
-      <label htmlFor="">Title</label>
-      <input
-        name="title"
-        placeholder="title"
-        type="text"
-        onChange={handleChange}
-        value={tasks.title}
-        className="rounded-sm text-gray-800 py-3 px-1"
-      />
-      <label htmlFor="">Description</label>
-      <textarea
-        name="description"
-        placeholder="description"
-        value={tasks.description}
-        onChange={handleChange}
-        className="rounded-sm text-gray-800 py-3 px-1 resize-none "
-      ></textarea>
-      <button className="  rounded-sm hover:bg-green-300 py-2 px-1">save</button>
-    </form>
+    <div className="w-full h-screen grid place-items-center ">
+      <form
+        className="bg-slate-800 w-4/5 md:w-1/2 flex flex-col p-3 gap-3 rounded-md"
+        onSubmit={handleSubmit}
+      >
+        <label className="text-sky-500" htmlFor="">Title</label>
+        <input
+          name="title"
+          placeholder="title"
+          type="text"
+          onChange={handleChange}
+          value={tasks.title}
+          className="rounded-sm text-gray-800 py-3 px-1 "
+        />
+        <label className="text-sky-500"  htmlFor="">Description</label>
+        <textarea
+          name="description"
+          placeholder="description"
+          value={tasks.description}
+          onChange={handleChange}
+          className="rounded-sm text-gray-800 h-24 py-3 px-1 resize-none "
+        ></textarea>
+        <button className="  rounded-sm bg-green-400 py-2 px-1">save</button>
+      </form>
+    </div>
   );
 }
 
