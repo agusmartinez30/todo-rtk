@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [
   {
     id: "1",
-    title: "test 1",
-    description: "test desc",
+    title: "Pasear al perro",
+    description: "Salir a la tarde al parque a pasear a Blako",
     completed: false,
   },
 ];

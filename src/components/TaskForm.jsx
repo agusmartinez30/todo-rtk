@@ -31,7 +31,7 @@ function TaskForm() {
     } else {
       const { title, description } = tasks;
       console.log(title, description);
-      if (title != "" && description != "") {
+      if (title != "") {
         dispatch(
           addTasks({
             ...tasks,
@@ -50,7 +50,7 @@ function TaskForm() {
 
         Toast.fire({
           icon: "warning",
-          title: "Completa los campos",
+          title: "El titulo es obligatorio",
         });
       }
     }
@@ -68,7 +68,7 @@ function TaskForm() {
         className="bg-slate-800 w-4/5 md:w-1/2 flex flex-col p-3 gap-3 rounded-md"
         onSubmit={handleSubmit}
       >
-        <label className="text-sky-500" htmlFor="">Title</label>
+        <label className="text-sky-500" htmlFor="">Title*</label>
         <input
           name="title"
           placeholder="title"
@@ -77,7 +77,7 @@ function TaskForm() {
           value={tasks.title}
           className="rounded-sm text-gray-800 py-3 px-1 "
         />
-        <label className="text-sky-500"  htmlFor="">Description</label>
+        <label className="text-sky-500"  htmlFor="">Description (opcional)</label>
         <textarea
           name="description"
           placeholder="description"
