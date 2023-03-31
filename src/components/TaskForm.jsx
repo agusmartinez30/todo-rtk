@@ -27,6 +27,7 @@ function TaskForm() {
     e.preventDefault();
     if (params.id) {
       dispatch(updateTasks(tasks));
+      navigate("/");
     } else {
       const { title, description } = tasks;
       console.log(title, description);
