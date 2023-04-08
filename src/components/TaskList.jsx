@@ -4,7 +4,8 @@ import { deleteTasks } from "../features/tasks/taskSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 function TaskList() {
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector((state) => state.tasks.taskItems);
+  console.log('task', tasks)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -15,8 +16,11 @@ function TaskList() {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          tasks.length < 1 && <h3 className="text-sky-500 text-2xl text-center">Add a new task...</h3>
+        }
         {tasks.map((task) => (
-          <div key={task.id} className="bg-slate-800 w-full p-3 rounded-md">
+          <div key={task.id} className="bg-slate-800 w-full p-3 rounded-md ">
             <header className="flex justify-between">
               <h3 className="text-sky-500 text-lg">{task.title}</h3>
               <div className="flex flex-row-reverse gap-2">

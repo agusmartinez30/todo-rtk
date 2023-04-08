@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 function TaskForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const tasksState = useSelector((state) => state.tasks);
+  const tasksState = useSelector((state) =>  state.tasks.taskItems);
+  console.log(tasksState)
   const params = useParams();
 
   const [tasks, setTasks] = useState({
@@ -30,7 +31,6 @@ function TaskForm() {
       navigate("/");
     } else {
       const { title, description } = tasks;
-      console.log(title, description);
       if (title != "") {
         dispatch(
           addTasks({
@@ -58,7 +58,7 @@ function TaskForm() {
 
   useEffect(() => {
     if (params.id) {
-      setTasks(tasksState.find((task) => task.id === params.id));
+      setTasks(tasksState.find((task) => task.id == params.id));
     }
   }, []);
 
@@ -85,7 +85,7 @@ function TaskForm() {
           onChange={handleChange}
           className="rounded-sm text-gray-800 h-24 py-3 px-1 resize-none "
         ></textarea>
-        <button className="  rounded-sm bg-green-400 py-2 px-1">save</button>
+        <button className="rounded-sm bg-green-400 py-2 px-1">save</button>
       </form>
     </div>
   );

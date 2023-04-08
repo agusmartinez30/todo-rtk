@@ -8,8 +8,6 @@ import TaskList from "./components/TaskList";
 import Home from "./pages/Home/Home";
 
 function App() {
-  const listTasks = useSelector((state) => state.tasks);
-  console.log(listTasks);
 
   return (
     <div class="bg-slate-900 h-full min-h-screen md:h-full text-white">
