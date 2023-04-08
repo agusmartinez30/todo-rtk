@@ -64,7 +64,7 @@ const Home = () => {
       </section>
       <section className="relative bottom-0 left-0  w-full flex justify-center p-4 ">
         <button
-          className="fixed bottom-4 left-auto bg-emerald-400  hover:bg-indigo-600 flex justify-center rounded-full text-xl md:text-lg w-100 p-8 "
+          className="fixed bottom-8 left-auto bg-emerald-400  hover:bg-indigo-600 flex justify-center rounded-full text-xl md:text-lg w-100 p-8 "
           onClick={() => navigate("/create")}
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
